@@ -1166,7 +1166,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
   };
   //暂停
   _pauseAudio = () => {
-    this.audio.pause();
+    //this.audio.pause();
     this.setState({ playing: false, pause: true }, () => {
       this.lyric && this.lyric.stop();
     });
@@ -1185,33 +1185,27 @@ export default class ReactJkMusicPlayer extends PureComponent {
     if (loadProgress < maxLoadProgress) {
       this.setState({ loadProgress: loadProgress + 1 });
     }
-    if (
-      // readyState === this.READY_SUCCESS_STATE &&
-      networkState !== this.NETWORK_STATE.NETWORK_NO_SOURCE
-    ) {
-      const { pause } = this.getLastPlayStatus();
-      const isLastPause = remember && !isInitRemember && pause;
-      const canPlay = isInitAutoplay || autoPlay === true;
-      this.setState(
-        {
-          playing: remember ? !isLastPause : canPlay,
-          loading: false,
-          pause: remember ? isLastPause : !canPlay,
-          loadProgress: maxLoadProgress
-        },
-        () => {
-          if (remember ? !isLastPause : canPlay) {
-            // fuck Safari is need muted :(
-            // this.audio.muted = true
-            // this.initLyricParser()
-            this.audio.play();
-          }
-          this.setState({ isInitAutoplay: true, isInitRemember: true });
+
+    const { pause } = this.getLastPlayStatus();
+    const isLastPause = remember && !isInitRemember && pause;
+    const canPlay = isInitAutoplay || autoPlay === true;
+    this.setState(
+      {
+        playing: remember ? !isLastPause : canPlay,
+        loading: false,
+        pause: remember ? isLastPause : !canPlay,
+        loadProgress: maxLoadProgress
+      },
+      () => {
+        if (remember ? !isLastPause : canPlay) {
+          // fuck Safari is need muted :(
+          // this.audio.muted = true
+          // this.initLyricParser()
+          //this.audio.play();
         }
-      );
-    } else {
-      this.onAudioLoadError();
-    }
+        this.setState({ isInitAutoplay: true, isInitRemember: true });
+      }
+    );
   };
   //设置音频长度
   setAudioLength = () => {
