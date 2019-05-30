@@ -1186,7 +1186,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
     const { isInitAutoplay, isInitRemember, loadProgress } = this.state;
     const { networkState } = this.audio;
     const maxLoadProgress = 100;
-    this.setState({ loading: true });
+    //this.setState({ loading: true });
     if (loadProgress < maxLoadProgress) {
       this.setState({ loadProgress: loadProgress + 1 });
     }
