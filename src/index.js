@@ -564,7 +564,6 @@ export default class ReactJkMusicPlayer extends PureComponent {
         {toggle && isMobile ? (
           <AudioPlayerMobile
             playing={playing}
-            loading={loading}
             pause={pause}
             name={name}
             singer={singer}
@@ -662,11 +661,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
                 </div>
                 <div className="player-content" key="player-content">
                   {/*播放按钮*/}
-                  {loading ? (
-                    <span>
-                      <Load />
-                    </span>
-                  ) : showPlay ? (
+                  {showPlay ? (
                     <span className="group">
                       <span
                         className="group prev-audio"
